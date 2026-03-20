@@ -122,7 +122,7 @@ sequenceDiagram
     Pi->>Store: Store stroller GPS
   end
 
-  App->>Pi: User connects phone to AP; set IP (default 192.168.4.1)
+  App->>Pi: User connects phone to AP, set IP (default 192.168.4.1)
   App->>Pi: GET /latest (periodic, e.g. ~2 s)
   Pi-->>App: status + data object (includes IMU pitch for slope)
   App->>Pi: GET /gps (stroller position + fix)
