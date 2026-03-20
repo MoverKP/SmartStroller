@@ -221,14 +221,11 @@ SmartStroller/
 
 ---
 
-## Team
+## Author
+
+**MoverKP**
 
 **Supervisor:** Dr. Kenneth Lo
-
-**Students:**
-- Fong Yuk Wai (22059440)
-- Li Ka Fai (22056657)
-- Mok Ho Yin (22056725)
 
 ---
 
