@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS实时位置追踪 - Google Maps</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #mapContainer {
+            width: 100%;
+            height: 100vh;
+        }
+        #infoPanel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 200px;
+        }
+        #infoPanel h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        #infoPanel p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .status.waiting {
+            color: #ff9800;
+        }
+        .status.active {
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div id="mapContainer"></div>
+    <div id="infoPanel">
+        <h3>GPS实时追踪</h3>
+        <p>状态: <span id="status" class="status waiting">等待GPS数据...</span></p>
+        <p>纬度: <span id="lat">--</span></p>
+        <p>经度: <span id="lon">--</span></p>
+        <p>更新时间: <span id="updateTime">--</span></p>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaBO9D6HaMOinmruJpnSnEyc9IFaTIqng&callback=initMap" async defer></script>
+    <script>
+        // 注意：请将 YOUR_API_KEY 替换为您的Google Maps API Key
+        // 获取API Key: https://console.cloud.google.com/google/maps-apis
+        // 需要启用 "Maps JavaScript API"
+        
+        var map;
+        var marker;
+        var polyline;
+        var path = [];
+        var apiKeyValid = false;
+        
+        // 初始化地图
+        function initMap() {
+            try {
+                // 默认位置（北京天安门）
+                var defaultCenter = { lat: 39.90923, lng: 116.397428 };
+                
+                map = new google.maps.Map(document.getElementById('mapContainer'), {
+                    zoom: 15,
+                    center: defaultCenter,
+                    mapTypeId: 'roadmap'
+                });
+                
+                apiKeyValid = true;
+                
+                // 开始轮询GPS数据
+                loadGPSData();
+                setInterval(loadGPSData, 1000); // 每秒更新一次
+            } catch (e) {
+                console.error('地图初始化失败:', e);
+                document.getElementById('mapContainer').innerHTML = 
+                    '<div style="padding: 50px; text-align: center; color: red;">' +
+                    '<h2>地图加载失败</h2>' +
+                    '<p>请检查API Key是否正确配置</p>' +
+                    '<p>获取API Key: <a href="https://console.cloud.google.com/google/maps-apis" target="_blank">Google Cloud Console</a></p>' +
+                    '</div>';
+            }
+        }
+        
+        // 加载GPS数据
+        function loadGPSData() {
+            if (!apiKeyValid || !map) {
+                return;
+            }
+            
+            fetch('gps_data.json?t=' + new Date().getTime())
+                .then(response => response.json())
+                .then(data => {
+                    if (data.current && data.current.lat && data.current.lon) {
+                        updateMap(data.current.lat, data.current.lon, data.history || []);
+                    }
+                })
+                .catch(error => {
+                    // 静默处理，等待GPS数据
+                });
+        }
+        
+        // 更新地图
+        function updateMap(lat, lon, history) {
+            if (!apiKeyValid || !map) {
+                return;
+            }
+            
+            var position = { lat: lat, lng: lon };
+            
+            // 更新信息面板
+            document.getElementById('status').textContent = '已连接';
+            document.getElementById('status').className = 'status active';
+            document.getElementById('lat').textContent = lat.toFixed(6) + '°';
+            document.getElementById('lon').textContent = lon.toFixed(6) + '°';
+            document.getElementById('updateTime').textContent = new Date().toLocaleTimeString('zh-CN');
+            
+            // 创建或更新标记
+            if (!marker) {
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: '当前位置',
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 8,
+                        fillColor: '#FF0000',
+                        fillOpacity: 1,
+                        strokeColor: '#FFFFFF',
+                        strokeWeight: 2
+                    }
+                });
+            } else {
+                marker.setPosition(position);
+            }
+            
+            // 更新路径
+            if (history && history.length > 0) {
+                path = history.map(function(item) {
+                    return { lat: item.lat, lng: item.lon };
+                });
+                
+                if (!polyline) {
+                    polyline = new google.maps.Polyline({
+                        path: path,
+                        geodesic: true,
+                        strokeColor: '#3366FF',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 3,
+                        map: map
+                    });
+                } else {
+                    polyline.setPath(path);
+                }
+            }
+            
+            // 移动地图中心到当前位置
+            map.setCenter(position);
+            
+            // 如果只有一个点，设置合适的缩放级别
+            if (history.length <= 1) {
+                map.setZoom(15);
+            } else {
+                // 自动调整视野以包含所有路径点
+                var bounds = new google.maps.LatLngBounds();
+                path.forEach(function(point) {
+                    bounds.extend(point);
+                });
+                map.fitBounds(bounds);
+            }
+        }
+        
+        // 如果API加载失败，显示错误信息
+        window.gm_authFailure = function() {
+            document.getElementById('mapContainer').innerHTML = 
+                '<div style="padding: 50px; text-align: center; color: red;">' +
+                '<h2>Google Maps API Key未配置或无效</h2>' +
+                '<p>请编辑 gps_map.html 文件，将 YOUR_API_KEY 替换为您的Google Maps API Key</p>' +
+                '<p><a href="https://console.cloud.google.com/google/maps-apis" target="_blank">点击这里获取API Key</a></p>' +
+                '<p>获取步骤：</p>' +
+                '<ol style="text-align: left; display: inline-block;">' +
+                '<li>访问Google Cloud Console并登录</li>' +
+                '<li>创建项目或选择现有项目</li>' +
+                '<li>启用 "Maps JavaScript API"</li>' +
+                '<li>创建API密钥</li>' +
+                '<li>将密钥替换到HTML文件中的YOUR_API_KEY位置</li>' +
+                '</ol>' +
+                '</div>';
+        };
+    </script>
+</body>
+</html>

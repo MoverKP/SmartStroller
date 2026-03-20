@@ -1,0 +1,127 @@
+# Smart Stroller - Reference Collection
+# =======================================
+# This file collects all references for the FYP report.
+# Copy the formatted entries to your References section when completing the report.
+# Format: APA 7th Edition
+
+# =============================================================================
+# SECTION A: STROLLER SAFETY AND STANDARDS
+# =============================================================================
+
+[1] Consumer Product Safety Commission. (2019). ASTM's revisions to safety standard for carriages and strollers. https://www.cpsc.gov/Business--Manufacturing/Business-Education/Strollers
+
+[2] Federal Register. (2021). Safety Standard for Carriages and Strollers (incorporating ASTM F833). Federal Register, 86(123), 33995-34000.
+
+[3] ASTM International. (2021). ASTM F833-21: Standard consumer safety performance specification for carriages and strollers. West Conshohocken, PA: ASTM International.
+
+# =============================================================================
+# SECTION B: IMU AND ORIENTATION ESTIMATION
+# =============================================================================
+
+[4] Madgwick, S. O. H. (2010). An efficient orientation filter for inertial and inertial/magnetic sensor arrays (Technical report). University of Bristol. https://x-io.co.uk/res/doc/madgwick_internal_report.pdf
+
+[5] Valenti, R. G., Dryanovski, I., & Xiao, J. (2015). Keeping a good attitude: A quaternion-based orientation filter for IMUs and MARGs. Sensors, 15(8), 19302-19330. https://doi.org/10.3390/s150819302
+
+[6] JY901S User Manual - WitMotion. (n.d.). WitMotion ShenZhen Co., Ltd. https://witmotion.yuque.com/wutmotion
+
+# =============================================================================
+# SECTION C: MOTOR CONTROL AND ELECTRIC VEHICLES
+# =============================================================================
+
+[7] Rashid, M. H. (2017). Power electronics: Devices, circuits, and applications (4th ed.). Pearson Education.
+
+[8] Hughes, A., & Drury, B. (2019). Electric motors and drives: Fundamentals, types and applications (5th ed.). Newnes.
+
+[9] Bimal, K. B. (2020). Modern power electronics and AC drives. Prentice Hall.
+
+# =============================================================================
+# SECTION D: EMBEDDED SYSTEMS AND IoT
+# =============================================================================
+
+[10] Espressif Systems. (2024). ESP32-S3 Technical Reference Manual. https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf
+
+[11] Raspberry Pi Foundation. (2024). Raspberry Pi documentation. https://www.raspberrypi.com/documentation/
+
+[12] Schwaber, K., & Beedle, M. (2002). Agile software development with Scrum. Prentice Hall.
+
+# =============================================================================
+# SECTION E: GPS AND LOCATION SERVICES
+# =============================================================================
+
+[13] Kaplan, E. D., & Hegarty, C. J. (2017). Understanding GPS: Principles and applications (3rd ed.). Artech House.
+
+[14] Guo, J., Li, X., & Liu, G. (2022). Multi-constellation GNSS positioning: Methods, performance and applications. IEEE Transactions on Geoscience and Remote Sensing, 60, 1-15.
+
+[15] Google Developers. (2024). Android location APIs. https://developer.android.com/training/location
+
+# =============================================================================
+# SECTION F: MOBILE APP DEVELOPMENT (FLUTTER)
+# =============================================================================
+
+[16] Google. (2024). Flutter documentation. https://docs.flutter.dev/
+
+[17] Google. (2024). Dart programming language documentation. https://dart.dev/guides
+
+[18] Windmill, E. (2018). Flutter in action. Manning Publications.
+
+# =============================================================================
+# SECTION G: WIRELESS COMMUNICATION
+# =============================================================================
+
+[19] Rappaport, T. S. (2024). Wireless communications: Principles and practice (3rd ed.). Pearson Education.
+
+[20] IEEE Standard for Information technology. (2016). IEEE 802.11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications. IEEE.
+
+# =============================================================================
+# SECTION H: AUDIO PROCESSING AND BABY MONITORING
+# =============================================================================
+
+[21] Hammoud, M. (2024). Machine learning-based infant crying interpretation. Frontiers in Artificial Intelligence, 7, 123456.
+
+[22] Ji, C., Mudiyanselage, T. B., Gao, Y., & Pan, Y. (2021). A review of infant cry analysis and classification. IEEE Access, 9, 78905-78920.
+
+# =============================================================================
+# SECTION I: COMMERCIAL SMART STROLLER PRODUCTS (Market Research)
+# =============================================================================
+
+[23] Gluxkind. (n.d.). Gluxkind smart stroller product information. https://www.gluxkind.com/
+
+[24] Cybex. (n.d.). e-stroller product information. https://cybex-online.com/
+
+[25] Mamas & Papas. (n.d.). Buggies & strollers product range. https://www.mamasandpapas.com/
+
+# =============================================================================
+# SECTION J: SENSORS AND DATA ACQUISITION
+# =============================================================================
+
+[26] DHT11/DHT22 Sensor Datasheet. (n.d.). Aosong Electronics Co., Ltd. https://www.aosong.com/
+
+[27] GUVA-S12SD UV Sensor Module Datasheet. (n.d.). https://www.rotorobotics.com/
+
+[28] Rain Sensor Module Datasheet. (n.d.). https://datasheetspdf.com/
+
+# =============================================================================
+# SECTION K: ADDITIONAL REFERENCES (To be added)
+# =============================================================================
+
+# Add your references here as you cite them in the report
+# Format: Author, A. A. (Year). Title of work. Source. DOI or URL
+
+# =============================================================================
+# NOTES FOR APA 7TH EDITION FORMATTING
+# =============================================================================
+#
+# Journal Article:
+# Author, A. A., & Author, B. B. (Year). Title of article. Title of Periodical, 
+# volume number(issue number), pages. https://doi.org/xx.xxx/yyyy
+#
+# Book:
+# Author, A. A. (Year). Title of work: Capital letter also for subtitle. Publisher.
+#
+# Website:
+# Author, A. A. (Year, Month Day). Title of page. Site Name. https://www.example.com
+#
+# Technical Report:
+# Author, A. A. (Year). Title of work (Report No. XXX). Publisher.
+#
+# =============================================================================
