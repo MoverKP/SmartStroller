@@ -224,9 +224,6 @@ SmartStroller/
 ## Author
 
 **MoverKP**
-
-**Supervisor:** Dr. Kenneth Lo
-
 ---
 
 ## License
